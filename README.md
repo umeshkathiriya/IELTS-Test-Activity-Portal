@@ -23,6 +23,7 @@ Listening test are based on prerecorded audio that plan automatically and studen
 Writing task developed for graph summary, letter, and essay writing with timer setup and word count. Students can write on given space or can submit the snap of hand written note on paper. Score for writing evaluate by admin (IELTS trainer) later from admin panel and score submitted will reflect on user dashboard.
 
 ## Code snippets
+**Load audio track one after on completion and change the questions in section**
 ```javascript
 /* Listening audio start */
 if($('body').hasClass('activityListening') || $('body').hasClass('testListening')){
@@ -60,6 +61,63 @@ if($('body').hasClass('activityListening') || $('body').hasClass('testListening'
 }
 /* End of listening */
 ```
+
+**Compare the array of user answer and stored correct answer object in JSON format.**
+```javascript
+/* show answer in answer compare modal. */
+var activityName = $('#slug').text(); /* get the name of activity */
+var correctTotal = wrongTotal = 0;
+var ansTotal = ansName.length;
+ans.forEach(function(answer,i) {
+    /* convert both answer to uppercase for easy matching words. */
+    var actualAnswer = ansObject[activityName][i].toUpperCase();
+    var submitAnswer = answer.toUpperCase();
+    /* regex to match whole exact word/number submit and not null. */
+    if(actualAnswer.match('\\b' + submitAnswer + '\\b','i') && answer.toUpperCase() != ''){
+        $('#finalAnswer').append('<tr><td>'+ansName[i].match(/\d+/)[0]+'</td><td>'+answer+'</td><td>'+ansObject[activityName][i]+'</td></tr>');
+        correctTotal++;
+    }else{
+        $('#finalAnswer').append('<tr><td class="danger">'+ansName[i].match(/\d+/)[0]+'</td><td class="danger">'+answer+'</td><td class="success">'+ansObject[activityName][i]+'</td></tr>');
+        wrongTotal++;
+    }
+});
+$('#correctTotal').append(correctTotal);
+$('#ansTotal').append(ansTotal);
+$('#wrongTotal').append(wrongTotal);
+/* end of answer display */
+/* call function to calculate the band score. */
+bandScoreFn(correctTotal);
+/* end of answer compare modal. */
+```
+
+**Native HTML5 Drag&Drop use case in one of question type in IELTS.**
+```javascript
+function drop(ev){
+    ev.preventDefault();
+    /* get current element id and OuterHTML */
+    var data = ev.dataTransfer.getData("text"); 
+    var currentTarget = ev.target;
+    /* Check droptarget class and append else update the target */
+    if (currentTarget.className == "dropTarget") {
+        currentTarget.appendChild(document.getElementById(data));
+        currentTarget.parentElement.classList.add("dropAnswered");
+    }else{
+        currentTarget.parentElement.appendChild(document.getElementById(data));
+        currentTarget = currentTarget.parentElement;
+    }
+    /* remove the all dropover class from dropzone */
+    document.querySelectorAll('.dropWrapper').forEach(e => e.classList.remove("dropOver"));
+    /* remove and add first element from dropzone to dragzone */
+    if(currentTarget.childElementCount > 1){
+        var firstChildElement = currentTarget.firstElementChild.outerHTML;
+        document.getElementById(dragList).innerHTML += firstChildElement;
+        currentTarget.removeChild(currentTarget.childNodes[0]);
+    }
+    /* invoke jquery function */
+    aqFunction(currentTarget.previousElementSibling);
+}
+```
+
 
 Checkout the client website for detail insight: https://www.door2success.ca
 
