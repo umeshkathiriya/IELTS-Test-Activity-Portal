@@ -23,7 +23,43 @@ Listening test are based on prerecorded audio that plan automatically and studen
 Writing task developed for graph summary, letter, and essay writing with timer setup and word count. Students can write on given space or can submit the snap of hand written note on paper. Score for writing evaluate by admin (IELTS trainer) later from admin panel and score submitted will reflect on user dashboard.
 
 ## Code snippets
-
+```javascript
+/* Listening audio start */
+if($('body').hasClass('activityListening') || $('body').hasClass('testListening')){
+    audioobject = document.getElementById("audioTrack");
+    var audio = document.getElementById("audioTrack");
+    var index = 2;
+    audio.play();
+    audio.addEventListener('ended', function(){
+        if(index <= 4){
+            if($('body').hasClass('activityListening')){
+                audio.src = '../activities/track/'+$('#slug').text()+'/s'+index+'.mp3';
+            }else{
+                audio.src = '../'+$('#slug').text().slice(0,-1)+'/track/s'+index+'.mp3';
+            }
+            /* console.log(audio.src); */ 
+            audio.play();
+            $('div[class^="para"], div[class^="section"]').css({'display':'none'});
+            $('.para'+index).css({'display':'block'});
+            $('.section'+index).css({'display':'block'});
+            /* Activate the section first question */
+            $('.test-part > ul header').each(function(){
+                if($(this).text().match(/\d+/) == index){
+                    $('.test-part > ul > li > a').parent().removeClass('selected');
+                    $(this).next().addClass('selected');
+                    $(this).next().children().addClass('active');
+                    $('.test-listening').scrollTop(0);
+                    focusAnswer();
+                }
+            });
+            index++;
+        }else{
+            $('.btnSubmit').click();
+        }
+    });
+}
+/* End of listening */
+```
 
 Checkout the client website for detail insight: https://www.door2success.ca
 
