@@ -5,6 +5,10 @@ IELTS Test and Daily Activity based Student Online Portal.
 Project is all about creating IELTS training test and student daily activities through a online portal where student get logged in and hands on with the questions types and understand the test format going to came on the live computer based exam.
 
 Challenge is to recreate exact replica of IELTS computer based test with same use cases and interactivity. Team consists of 2 member one Frontend developer/Designer and PHP Backend developer.
+
+
+![IELTS TEST](https://github.com/umeshkathiriya/IELTS-Test-Activity-Portal/blob/main/Project_Snaps/User-Test-LandingPage.png?raw=true)
+
 ## Project walk through
 Initial design has been created with theme branding of client **Door2Success** and functional prototype has been created with use of **HTML, CSS, Javascript, JQuery and Bootstrap**. Later **PHP backend** has been integrated so as user database can be managed and login sessions kept for Admin and User dashboard separately. Various functionality being developed for admin to check and give feedback on student activity and test submission.
 
@@ -120,5 +124,7 @@ function drop(ev){
 
 
 Checkout the client website for detail insight: https://www.door2success.ca
+
+Here project screenshots: [Project_Snaps](https://github.com/umeshkathiriya/IELTS-Test-Activity-Portal/tree/main/Project_Snaps)
 
 **Note**: Detailed code can be shared on request.
