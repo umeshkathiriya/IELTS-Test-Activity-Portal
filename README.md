@@ -127,4 +127,3 @@ Checkout the client website for detail insight: https://www.door2success.ca
 
 Here project screenshots: [Project_Snaps](https://github.com/umeshkathiriya/IELTS-Test-Activity-Portal/tree/main/Project_Snaps)
 
-**Note**: Detailed code can be shared on request.
